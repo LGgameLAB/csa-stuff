@@ -16,4 +16,7 @@ class main {
         word2 = word2.replace("/", "o");
         return word2;
     }
+    public static void FourRectanglePrinter(){
+        //Do stuff
+    }
 }
