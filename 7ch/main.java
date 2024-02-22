@@ -2,7 +2,7 @@ import java.util.*;
 
 class main {
 	public static void main(String[] args){
-		new p75();
+		new p74();
 	}
 }
 
