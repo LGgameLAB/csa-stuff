@@ -2,8 +2,6 @@ import java.util.*;
 
 class main {
 	public static void main(String[] args){
-		char[][] board = new char[3][3];
-		System.out.print(board[0][0] == 0);
 		Game g = new Game();
 		g.run();
 	}
@@ -11,25 +9,29 @@ class main {
 
 class Game extends Program{
 	private char[][] board;
+
 	public Game(){
 		board = new char[3][3];
 	}
 	public void run(){
 		int move = 0;
-		print("insert your piece by typing in a number 1-9 like so \n");
+		print("Insert your piece by typing in a number 1-9 like so \n", ANSI_PURPLE);
 		printExampleBoard();
 		while (!isFull()){
 			printBoard();
 			if (hasWon('O')){
-				print("YAY YOU WON o");
+				print("YAY YOU WON O", ANSI_YELLOW);
 				break;
 			}
 			print("Your turn X> ");
 			move = scan.nextInt();
 			board[(move-1)/3][(move-1)%3] = 'X';
 			printBoard();
+			if (isFull()){
+				break;
+			}
 			if (hasWon('X')){
-				print("YAY YOU WON X");
+				print("YAY YOU WON X", ANSI_YELLOW);
 				break;
 			}
 			
@@ -37,7 +39,7 @@ class Game extends Program{
 			move = scan.nextInt();
 			board[(move-1)/3][(move-1)%3] = 'O';
 		}
-		print("Game over");
+		print("\nGame over");
 	}
 	public void printExampleBoard(){
 		int a = 1;
@@ -100,8 +102,21 @@ class Game extends Program{
 class Program {
 	Scanner scan = new Scanner(System.in);
 	Random rand = new Random();
+	public static final String ANSI_RESET = "\u001B[0m";
+	public static final String ANSI_BLACK = "\u001B[30m";
+	public static final String ANSI_RED = "\u001B[31m";
+	public static final String ANSI_GREEN = "\u001B[32m";
+	public static final String ANSI_YELLOW = "\u001B[33m";
+	public static final String ANSI_BLUE = "\u001B[34m";
+	public static final String ANSI_PURPLE = "\u001B[35m";
+	public static final String ANSI_CYAN = "\u001B[36m";
+	public static final String ANSI_WHITE = "\u001B[37m";
+
 	public void print(String inp){
 		System.out.print(inp);
+	}
+	public void print(String inp, String color){
+		System.out.print(color + inp + ANSI_RESET);
 	}
 	public void print(int inp){
 		System.out.print(inp);
