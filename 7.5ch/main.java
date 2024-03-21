@@ -2,8 +2,72 @@ import java.util.*;
 
 class main {
 	public static void main(String[] args){
-		Game g = new Game();
-		g.run();
+		// Game g = new Game();
+		// g.run();
+		new p712();
+	}
+}
+class p712 extends Program{
+	public p712(){
+		Invoice inv = new Invoice(); 
+		while (true){
+			print("Price: ");
+			Double p = scan.nextDouble();
+			if (p == -1){
+				break;
+			}
+			print("Quantity: ");
+			int q = scan.nextInt();
+			print("Is it a pet?: ");
+			boolean y = false;
+			String pet = scan.next();
+			if (pet.equals("y")) {
+				// print("yay");
+				y = true;
+			}
+			inv.add(new Item(p, y, q));
+		}	
+		print(inv.getDiscount());
+	}
+}
+
+class Item{
+	public double price;
+	public boolean isPet;
+	public int quantity;
+
+	public Item(double price, boolean isPet, int quantity){
+		this.price = price;
+		this.isPet = isPet;
+		this.quantity = quantity;
+	}
+}
+
+class Invoice{
+	private ArrayList<Item> items;
+	public Invoice(){
+		items = new ArrayList<Item>();
+	}
+	public void add(Item i){
+		items.add(i);
+	}
+	public double getDiscount(){
+		double discount = 0.0;
+		int pets = 0;
+		int misc = 0;
+		for (Item x: items){
+			if (x.isPet){
+				pets++;
+			} else {
+				discount += 0.2*x.price;
+				misc++;
+			}
+		}
+		if (pets >= 1 && misc >= 5){
+			return discount;
+		} else {
+			return 0;
+		}
 	}
 }
 
