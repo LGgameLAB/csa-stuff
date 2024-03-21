@@ -86,9 +86,7 @@ public class Item {
             }
         }
     }
-    // public setDesc(String inp){
-    //     description = inp;
-    // }
+
 }
 
 // class Items {

@@ -19,10 +19,11 @@ import java.util.*;
 public class Game 
 {
     private Parser parser;
-    public Room currentRoom;
     private CommandWords commands;
-    private Player player;
     private ArrayList<Room> rooms;
+
+    public Room currentRoom;
+    public Player player;
         
     /**
      * Create the game and initialise its internal map.
@@ -56,21 +57,25 @@ public class Game
       
         // create the rooms
         r1 = new Room(1, "in the visitor entrance bay");
-        r2 = new Room(2, "in the east bay wing");
+        r2 = new Room(2, "in the east bay wing", 16, 3);
         r3 = new Room(3, "in the defense systems array");
-        r3.setLore("Observing the defense logs, you read that the crew left at -98 hours and set security to low. Since then, the port has been visited twice, once by you and once..");
+        r3.setLore("Observing the defense logs, you read that the crew left at -98 hours and set security to low. Since then, the port has been visited twice, once by you and once more..");
         r3.addItem(Items.SHIELD.clone());
         r4 = new Room(4, "in the utlity closet");
         r4.setLore("The items here have been scattered and several tools are missing");
         r4.addItem(Items.SCREWDRIVER.clone());
         r4.addItem(Items.LADDER.clone());
         r5 = new Room(5, "in the suit room");
+        r5.setLore("Only one suit remains on the seven suit racks...");
         r6 = new Room(6, "in the filtration system");
+        r6.setLore("This room is filled with pipes and man sized vents sending breathable air around "+Colors.RED+"Zuul"+Colors.RESET+" as well as waste chemicals");
         r7 = new Room(7, "in the debriefing room");
+        r7.setLore("Swivel chairs are lined around a circular table, each facing a different direction There is a board on the wall that has a list of tasks with the most recent one being\n\033[3mAnswer distress call\033[0m");
         r8 = new Room(8, "in the radar arrays");
-        r9 = new Room(9, "in the "+Colors.RED+"CRITICAL ZONE");
+        r8.setLore("There is a small obround window on the far side of the room where you can see a large radar pointing out into space.");
+        r9 = new Room(9, "in the "+Colors.RED+"CRITICAL ZONE"+Colors.RESET);
         r10 = new Room(10, "in the core analyzer");
-        r11 = new Room(11, "in the "+Colors.RED+"CORE");
+        r11 = new Room(11, "in the "+Colors.RED+"CORE"+Colors.RESET);
 
         // initialise room exits
         r1.setExit("east", r2);
@@ -122,6 +127,7 @@ public class Game
         while (! finished) {
             Command command = parser.getCommand();
             finished = processCommand(command);
+            GameState.checkEvent(this);
         }
         System.out.println("Thank you for playing.  Good bye.");
     }
@@ -198,7 +204,16 @@ public class Game
         // else command not recognised.
         return wantToQuit;
     }
-
+    /**
+     * 
+     * @return the current room
+     */
+    public Room getCurrentRoom(){
+        return currentRoom;
+    }
+    public Parser getParser(){
+        return parser;
+    }
     // implementations of user commands:
 
     /**
@@ -256,23 +271,25 @@ public class Game
             System.out.println("Go where?");
             return;
         }
-        String psg = GameState.checkPassage(this);
-        if (psg.equals("good")){
-            String direction = command.getSecondWord();
+        String direction = command.getSecondWord();
 
-            // Try to leave current room.
-            Room nextRoom = currentRoom.getExit(direction);
+        // Try to leave current room.
+        Room nextRoom = currentRoom.getExit(direction);
 
-            if (nextRoom == null) {
-                System.out.println("There is no door!");
-            }
-            else {
+        if (nextRoom == null) {
+            System.out.println("There is no door!");
+        }
+        else {
+            String psg = GameState.checkPassage(this, nextRoom);
+            if (psg.equals("good")){
                 currentRoom = nextRoom;
                 System.out.println(currentRoom.getLongDescription());
+            } else {
+                println(psg);
             }
-        } else {
-            println(psg);
+            
         }
+        
     }
     /**
      * Lets you investigate the room more closely
@@ -288,9 +305,8 @@ public class Game
         } else {
             for (Item i: stuff){
                 println("There is a " + i.getShortDescription());
-                println("Would you like to pick it up? (y/n)");
-                String yes = parser.getInput();
-                if (yes.equals("yes") || yes.equals("Yes") || yes.equals("y")){
+                println("Would you like to pick it up?");
+                if (parser.getYesNo()){
                     if (player.addItem(i)){
                         println("You added the " + i.getShortDescription() + " to your pack");
                         currentRoom.delete(i);

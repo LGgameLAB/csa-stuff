@@ -47,6 +47,11 @@ public class Room
         exits = new HashMap<>();
         id = rand.nextInt(900)+100;
     }
+    /**
+     * 
+     * @param id
+     * @param description
+     */
     public Room(int id, String description) 
     {
         this.description = description;
@@ -56,17 +61,20 @@ public class Room
     }
     /**
      * 
+     * @param id
      * @param description
-     * @param w
-     * @param h
+     * @param width
+     * @param height
      */
-    public Room(String description, int w, int h) 
+    public Room(int id, String description, int w, int h) 
     {
         this.description = description;
-        this.width = w;
-        this.height = h;
+        width = w;
+        height = h;
         generateDiagram();
         exits = new HashMap<>();
+        this.id = id;
+        
     }
     public void generateDiagram(){
         if (width == 0){

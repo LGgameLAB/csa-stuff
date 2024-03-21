@@ -62,6 +62,10 @@ public class Parser
             return new Command(null, word2); 
         }
     }
+    /**
+     * 
+     * @return String of whatever was typed
+     */
     public String getInput(){
         String inputLine;   // will hold the full input line
         String word1 = null;
@@ -81,9 +85,26 @@ public class Parser
             }
         }
 
-        // Now check whether this word is known. If so, create a command
-        // with it. If not, create a "null" command (for unknown command).
         return word1;
+    }
+    /**
+     * 
+     * @return true for yes, false for everything else
+     */
+    public boolean getYesNo(){
+        String inputLine;   // will hold the full input line
+        System.out.print(Colors.GREEN+"Enter (y/n)> "+Colors.RESET);     // print prompt
+
+        inputLine = reader.nextLine();
+
+        // Find up to two words on the line.
+        Scanner tokenizer = new Scanner(inputLine);
+        String yes = tokenizer.next();
+        if (yes.equals("yes") || yes.equals("Yes") || yes.equals("y")){
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**
