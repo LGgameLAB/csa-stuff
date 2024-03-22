@@ -12,8 +12,8 @@ import java.util.*;
  */
 public class Main
 {
-   public static void main( String[] args ) throws IOException {
-        System.out.println(new String(Files.readAllBytes(Paths.get("csa-stuff/zuul/endscreen.txt"))));
+   public static void main( String[] args ){
+        // System.out.println(new String(Files.readAllBytes(Paths.get("csa-stuff/zuul/endscreen.txt"))));
         Game game = new Game(); 
         game.play();
     

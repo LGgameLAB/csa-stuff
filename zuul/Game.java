@@ -76,6 +76,7 @@ public class Game
         r9 = new Room(9, "in the "+Colors.RED+"CRITICAL ZONE"+Colors.RESET);
         r9.setLore("This room is dimly lit and "+Colors.RED+"warnings" + Colors.RESET + " along the eastern exit imply that it may be dangerous to venture to");
         r10 = new Room(10, "in the core analyzer");
+        r10.setLore("There are several display screens in this room giving readings on the " +Colors.RED + "Zuul" + Colors.RESET + " core. \nIt appears that the core spin drive interface is active");
         r11 = new Room(11, "in the "+Colors.RED+"CORE"+Colors.RESET);
 
         // initialise room exits
