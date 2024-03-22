@@ -41,6 +41,11 @@ class Item{
 		this.isPet = isPet;
 		this.quantity = quantity;
 	}
+
+    public String getUse(Game game) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getUse'");
+    }
 }
 
 class Invoice{
@@ -161,6 +166,10 @@ class Game extends Program{
 		}
 		return true;
 	}
+    public void play() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'play'");
+    }
 }
 
 class Program {

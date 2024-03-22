@@ -11,7 +11,7 @@ public class Player {
      */
     public Player(){
         items = new ArrayList<Item>();
-        items.add(Items.LADDER.clone());
+        // items.add(Items.LADDER.clone());
     }
     /**
      * 
@@ -72,19 +72,27 @@ public class Player {
     }
     /**
      * 
-     * @return list of the players items as a String
+     * @return list of the players items as a game ready String 
      */
     public String seeItemList(){
         String msg = "Your items:\n";
         for (Item i: items){
-            msg += i.getShortDescription() + "\n";
+            if (items.indexOf(i) == items.size()-1){
+                msg += "└──";
+            } else {
+                msg += "├──";
+            }
+            msg += Colors.CYAN + i.getShortDescription() + Colors.RESET+"\n";
         }
-        msg += "Total weight: " + getPackWeight();
+        if (items.size() == 0){
+            msg += Colors.PURPLE + "No items in pack\n" + Colors.RESET;
+        }
+        msg += "Total weight: " + getPackWeight() + " lbs";
         return msg;
     }
     /**
      * 
-     * @return
+     * @return ArrayList<Item> of the players items
      */
     public ArrayList<Item> getItems(){
         return items;

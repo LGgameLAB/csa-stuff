@@ -1,4 +1,7 @@
+import java.io.IOException;
 import java.lang.reflect.Method;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 public class GameState {
     public static Method getState(String name) throws NoSuchMethodException {
@@ -30,11 +33,16 @@ public class GameState {
      * @return String 
      */
     public static String checkPassage(Game game, Room nextRoom){
-        if (nextRoom.getId() == 11){
-            if (game.player.hasItem("temp-shield")){
-                return "Your temp shield keeps you safe against high levels of radiation as you make your way towards...";
-            } else {
-                game.println("You die to radiation bombardment . . . " + Colors.RED + "GAME OVER");
+        if (nextRoom.getId() == 1){
+            if (true){//(game.player.hasItem("temp-shield")){
+                // try{
+                    return "Your temp shield keeps you safe against high levels of radiation as you make your way towards...\n" + ;
+                // } catch(Exception e) {
+                //     return e.toString();
+                // }
+            
+                } else {
+                game.println("You die to radiation bombardment . . . " + Colors.RED + "GAME OVER" + Colors.RESET);
                 System.exit(0);
             }
         }
@@ -48,7 +56,7 @@ public class GameState {
         if (game.currentRoom.getId() == 8 && game.player.hasItem("screw-driver")){
             game.println("Would you like to use your screwdriver to fix the radar system?");
             if (game.getParser().getYesNo()){
-                game.println("The radar is fixed. On screen you can see what looks to be debris of a space ship heading 200 m/s away from " +Colors.RED + "Zuul" + Colors.RESET);
+                game.println("The radar is fixed. On the display screen you can see what looks to be debris of a space ship heading 200 m/s away from " +Colors.RED + "Zuul" + Colors.RESET);
             }
         }
     }

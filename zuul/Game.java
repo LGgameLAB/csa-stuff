@@ -60,7 +60,7 @@ public class Game
         r2 = new Room(2, "in the east bay wing", 16, 3);
         r3 = new Room(3, "in the defense systems array");
         r3.setLore("Observing the defense logs, you read that the crew left at -98 hours and set security to low. Since then, the port has been visited twice, once by you and once more..");
-        r3.addItem(Items.SHIELD.clone());
+        r3.addItem((Item) Items.SHIELD.clone());
         r4 = new Room(4, "in the utlity closet");
         r4.setLore("The items here have been scattered and several tools are missing");
         r4.addItem(Items.SCREWDRIVER.clone());
@@ -74,6 +74,7 @@ public class Game
         r8 = new Room(8, "in the radar arrays");
         r8.setLore("There is a small obround window on the far side of the room where you can see a large radar pointing out into space.");
         r9 = new Room(9, "in the "+Colors.RED+"CRITICAL ZONE"+Colors.RESET);
+        r9.setLore("This room is dimly lit and "+Colors.RED+"warnings" + Colors.RESET + " along the eastern exit imply that it may be dangerous to venture to");
         r10 = new Room(10, "in the core analyzer");
         r11 = new Room(11, "in the "+Colors.RED+"CORE"+Colors.RESET);
 
@@ -162,16 +163,6 @@ public class Game
             return false;
         }
         
-        // try { 
-        //     // Get the method of myClass 
-        //     // using getMethod() method 
-        //     Class<Game> aarg = Game.class;  
-        //     Method me = aarg.getMethod(command.getCommandWord(), Command.class); 
-        //     me.invoke(this); 
-        // } 
-        // catch (Exception e) { 
-        //     System.out.println(e); 
-        // } 
 
         String commandWord = command.getCommandWord();
         if (commandWord.equals("help")) {
