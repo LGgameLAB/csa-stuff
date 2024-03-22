@@ -76,10 +76,11 @@ public class GameState {
      * @param game
      */
     public static void checkEvent(Game game){
-        if (game.currentRoom.getId() == 8 && game.player.hasItem("screw-driver")){
+        if (game.currentRoom.getId() == 8 && game.player.hasItem("screw-driver") && !game.radarFixed){
             game.println("Would you like to use your screwdriver to fix the radar system?");
             if (game.getParser().getYesNo()){
                 game.println("The radar is fixed. On the display screen you can see what looks to be debris of a space ship heading 200 m/s away from " +Colors.RED + "Zuul" + Colors.RESET);
+                game.radarFixed = true;
             }
         }
     }
