@@ -1,0 +1,9 @@
+public class Monthly extends Appointment{
+    public Monthly(int day, String n){
+        super(n);
+        this.day = day;
+    }
+    public boolean occursOn(int a, int b, int c){
+        return c == day;
+    }
+}
