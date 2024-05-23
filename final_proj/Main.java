@@ -7,7 +7,7 @@ public class Main{
         StateReader reader = null;
         while (reader == null){
             print("Please enter a state abbreviation> ");
-            String inp = "STATE."+in.next()+".TXT";
+            String inp = "STATE." + in.next().toUpperCase() +".TXT";
             System.out.println("Loading " + inp);
             try{reader = new StateReader(inp);} catch (FileNotFoundException e1 ){
                 println("\nThat state was not valid, please try again");
